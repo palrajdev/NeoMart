@@ -12,6 +12,10 @@ const config = {
       fontFamily: {
         sans: ["var(--font-sans)"],
         mono: ["var(--font-mono)"],
+        serif: ["var(--font-serif)"],
+        display: ["var(--font-display)"],
+        body: ["var(--font-body)"],
+        heading: ["var(--font-heading)"],
       },
     },
   },

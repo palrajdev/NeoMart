@@ -6,7 +6,7 @@ import clsx from "clsx";
 import { Providers } from "./providers";
 
 import { siteConfig } from "@/config/site";
-import { fontSans } from "@/config/fonts";
+import { fontSans, fontMono, fontSerif, fontDisplay, fontBody, fontHeading } from "@/config/fonts";
 
 export const metadata: Metadata = {
   title: {
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   },
   description: siteConfig.description,
   icons: {
-    icon: "/favicon.ico",
+    icon: "/N.svg",
   },
 };
 
@@ -38,6 +38,11 @@ export default function RootLayout({
         className={clsx(
           "min-h-screen text-foreground bg-background font-sans antialiased",
           fontSans.variable,
+          fontMono.variable,
+          fontSerif.variable,
+          fontDisplay.variable,
+          fontBody.variable,
+          fontHeading.variable,
         )}
       >
         {/* Providers (HeroUIProvider, QueryClientProvider, etc) */}

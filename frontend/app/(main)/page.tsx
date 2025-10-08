@@ -1,63 +1,71 @@
-// app/(main)/page.tsx
-"use client";
-import React from 'react'
-import { useForm } from 'react-hook-form'
-import HerouiInput from '@/components/ui/HerouiInput'
-import HerouiSelect from '@/components/ui/HerouiSelect'
-import HerouiButton from '@/components/ui/HerouiButton'
+'use client';
+import {Card, Skeleton} from "@heroui/react";
+import { Button } from "@heroui/button";
+import Image from "next/image";
+import Link from "next/link";
 
-type FormData = {
-  name: string
-  email: string
-  role: string
-}
-
-export default function MainPage() {
-  const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
-    defaultValues: { role: 'customer' }
-  })
-
-  function onSubmit(data: FormData) {
-    console.log('form submit', data)
-    // do API call / react query mutation
-  }
-
+export default function HomePage() {
   return (
-    <div className="p-6 max-w-2xl mx-auto">
-      <h1 className="text-2xl font-semibold mb-4">Main content — example form</h1>
-
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-        <HerouiInput
-          id="name"
-          label="Full name"
-          register={register('name', { required: 'Name required' })}
-          error={errors.name?.message?.toString()}
-        />
-
-        <HerouiInput
-          id="email"
-          label="Email"
-          register={register('email', { required: 'Email required' })}
-          error={errors.email?.message?.toString()}
-          type="email"
-        />
-
-        <HerouiSelect
-          id="role"
-          label="Role"
-          options={[
-            { value: 'customer', label: 'Customer' },
-            { value: 'merchant', label: 'Merchant' },
-            { value: 'admin', label: 'Admin' },
-          ]}
-          register={register('role')}
-        />
-
-        <div className="flex gap-3">
-          <HerouiButton type="submit">Save</HerouiButton>
-          <HerouiButton variant="ghost" onClick={() => {}}>Cancel</HerouiButton>
+<div>
+      <div className="max-w-7xl mx-auto flex flex-col-reverse lg:flex-row items-center justify-between  ">
+        
+        {/* Left: Text content */}
+        <div className="w-full lg:w-1/2 space-y-6 text-center lg:text-left">
+          <h1 className="text-4xl sm:text-5xl font-extrabold dark:text-white text-gray-900 leading-tight">
+            Eco-Friendly Charcoal, <br className="hidden sm:block" />
+            Delivered Fresh to Your Door.
+          </h1>
+          <p className="text-lg text-gray-600 max-w-xl mx-auto lg:mx-0">
+            Sustainable fuel solutions for kitchens, grills, and businesses — crafted with care.
+          </p>
+          
+          {/* CTA(Call To Action) Buttons */}
+          <div className="mt-6 flex flex-col sm:flex-row justify-center lg:justify-start gap-4">
+            <Link href="/products">
+              <Button color="success" size="lg" radius="lg" className="font-semibold">
+                Shop Now
+              </Button>
+            </Link>
+            <Link href="/about">
+              <Button variant="bordered" color="success" size="lg" radius="lg" className="font-semibold">
+                Learn More
+              </Button>
+            </Link>
+          </div>
         </div>
-      </form>
+
+        {/* Right: Image */}
+        <div className="relative w-full lg:w-1/2 h-72 sm:h-96 lg:h-[500px]">
+
+        <Card className="w-full space-y-5 p-4" radius="lg">
+      <Skeleton className="rounded-lg">
+        <div className="w-full rounded-lg bg-default-300" />
+      </Skeleton>
+      <div className="space-y-3">
+        <Skeleton className="w-3/5 rounded-lg">
+          <div className="h-3 w-3/5 rounded-lg bg-default-200" />
+        </Skeleton>
+        <Skeleton className="w-4/5 rounded-lg">
+          <div className="h-3 w-4/5 rounded-lg bg-default-200" />
+        </Skeleton>
+        <Skeleton className="w-2/5 rounded-lg">
+          <div className="h-3 w-2/5 rounded-lg bg-default-300" />
+        </Skeleton>
+      </div>
+    </Card>
+
+          <Image
+            src="/images/view-burning-charcoal.jpg"
+            alt="Eco-friendly charcoal"
+            fill
+            priority
+            className="object-cover rounded-3xl shadow-xl"
+          />
+        </div>
+      </div>
+
+      {/* Decorative background smoke / overlay */}
+      <div className="absolute inset-0 -z-10 bg-[url('/images/smoke-texture.png')] bg-cover bg-center opacity-10"></div>
     </div>
-  )
+  );
 }
